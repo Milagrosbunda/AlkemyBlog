@@ -1,0 +1,92 @@
+
+<html xmlns:th="http://www.thymeleaf.org">
+    
+      <head>
+        <title>Blog</title>
+        <meta charset="utf-8" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+              rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+              crossorigin="anonymous"/>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    </head>
+
+    
+    <!--nav
+    <div style="font-size: large; margin-top: 20px; margin-left: 20px; position: fixed">
+    <ul class="nav">
+        <li class="nav-item">
+            <a class="nav-link active" th:href="@{/}">Home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/newPost}">New Post</a>
+        </li>
+    </ul>
+
+
+    <div  class="form-row" style="max-width: 170px; margin-top: 20px;">
+        <form th:action="@{/get/posts}" method="post" style="align-content: flex-end">
+
+            <div class="col">
+                <input type="text" class="form-control" name="searchCode" placeholder="Search post by code">
+            </div>
+            <button type="submit" class="btn btn-primary">Search</button>
+
+        </form></div></div>   -->
+    
+    
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: large!important; background-color: lavender!important">
+        <div class="container-fluid">
+            <a class="navbar-brand" th:href="@{/}">Blog</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">      
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/newPost}">New post</a>
+                    </li> 
+                </ul>
+                <form class="d-flex" th:action="@{/get/posts}" method="post">
+                    <input class="form-control me-2" name="searchCode" placeholder="Search post by code" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    
+    
+    
+    
+   
+    <body>
+
+        <h2 style="text-align: center; margin: 70px;">Posts</h2>
+
+        <div th:if="${posts != null and !posts.empty}">
+
+            <div th:each="post : ${posts}">
+
+                <div class="card" style="width: 50%; align-self: center; margin-left: 20%;" >
+                    <div class="card-body">
+                        <span style="font-size: smaller">Post number: <span style="font-size: smaller" th:text="${post.code}"></span></span>
+                        <div style="padding-bottom: 20px;"> 
+                            <a th:href="@{/more/} + ${post.code}" th:text="${post.title}" class="card-title" style="font-size: xx-large;"></a>
+                            <br>
+                        </div>
+                        <a th:href="@{/patch/posts/} + ${post.code}" class="btn btn-primary">Edit</a>
+                        <a th:href="@{/delete/} + ${post.code}" class="btn btn-primary">Delete</a>
+
+                    </div>
+                </div> <br>
+
+            </div>      
+        </div>  
+        <div style="text-align:center; font-size: large; font-weight: bold; margin: 10px;">
+            <a  th:href="@{/get/posts}">More...</a> </div>
+
+
+
+
+    </body>
+</html>

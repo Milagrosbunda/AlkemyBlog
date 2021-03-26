@@ -1,0 +1,75 @@
+<html xmlns:th="http://www.thymeleaf.org" 
+      xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>Blog</title>
+        <meta charset="utf-8"/>
+ 
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+              rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+              crossorigin="anonymous">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+
+
+    <!--nav-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="font-size: large!important; background-color: lavender!important">
+  <div class="container-fluid">
+    <a class="navbar-brand" th:href="@{/}">Blog</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">      
+        <li class="nav-item">
+          <a class="nav-link" th:href="@{/newPost}">New post</a>
+        </li> 
+      </ul>
+      <form class="d-flex" th:action="@{/get/posts}" method="post">
+        <input class="form-control me-2" name ="searchCode"  placeholder="Search post by code" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+    <body>
+
+        <h2 style="text-align: center; margin: 70px;">Edit post</h2>
+
+        <div style="margin: 50px;">
+            <form th:action="@{/patch}" th:object="${post}" method="post" enctype="multipart/form-data">
+
+                <input type="hidden" name="code" class="form-label" th:field="*{code}"/>
+
+                <div class="mb-3">
+                    <label for="title" class="form-label" >Title:</label>
+                    <input type="text" class="form-control" id="title" th:field="*{title}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="content" class="form-label">Content:</label>
+                    <input type="text" class="form-control" id="content" th:field="*{content}" required>
+                </div>
+                <div class="mb-3">
+                    <label for="category" class="form-label">Category:</label>
+                    <input type="text" class="form-control" id="category" th:field="*{category}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="uploadImg" class="form-label">Add image:</label>
+                    <input type="file"  class="form-control" id="uploadImg" name="uploadImg" accept="image/png, image/jpeg" /></div>
+                    
+              
+
+                    <button type="submit" class="btn btn-primary" name="save">Save</button>
+
+            </form>
+                
+        </div>    
+
+
+
+    </body>
+</html>
+
